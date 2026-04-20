@@ -1,1082 +1,290 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Alexander Argakov — Founder, Eximens</title>
-  <meta name="description" content="Building agent-powered knowledge architecture for engineering companies. Founder of Eximens." />
-  <meta property="og:title" content="Alexander Argakov — Founder, Eximens" />
-  <meta property="og:description" content="Building agent-powered knowledge architecture for engineering companies with 50–500 employees." />
-  <meta property="og:type" content="website" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
- 
-    :root {
-      --dark: #0f172a;
-      --dark-2: #1e293b;
-      --mid: #334155;
-      --muted: #64748b;
-      --border: #e2e8f0;
-      --light: #f8fafc;
-      --white: #ffffff;
-      --accent: #2563eb;
-      --accent-light: #eff6ff;
-      --accent-muted: #93c5fd;
-      --teal: #0d9488;
-      --teal-light: #f0fdfa;
-    }
- 
-    html { scroll-behavior: smooth; }
- 
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      font-size: 16px;
-      line-height: 1.6;
-      color: var(--dark-2);
-      background: var(--white);
-      -webkit-font-smoothing: antialiased;
-    }
- 
-    /* ── LANGUAGE TOGGLE ── */
-    [data-ru] { display: none; }
-    body.ru [data-en] { display: none; }
-    body.ru [data-ru] { display: revert; }
- 
-    /* ── NAV ── */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 2rem;
-      height: 64px;
-      background: rgba(15, 23, 42, 0.92);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-    }
- 
-    .nav-logo {
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: var(--white);
-      letter-spacing: -0.01em;
-      text-decoration: none;
-    }
- 
-    .nav-logo span {
-      color: var(--accent-muted);
-      font-weight: 400;
-    }
- 
-    .nav-right {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
- 
-    .lang-toggle {
-      display: flex;
-      align-items: center;
-      gap: 0;
-      border: 1px solid rgba(255,255,255,0.15);
-      border-radius: 6px;
-      overflow: hidden;
-      font-size: 0.8rem;
-    }
- 
-    .lang-btn {
-      padding: 0.3rem 0.65rem;
-      background: transparent;
-      color: rgba(255,255,255,0.5);
-      border: none;
-      cursor: pointer;
-      font-family: inherit;
-      font-size: 0.8rem;
-      font-weight: 500;
-      letter-spacing: 0.02em;
-      transition: all 0.15s;
-    }
- 
-    .lang-btn.active {
-      background: rgba(255,255,255,0.12);
-      color: var(--white);
-    }
- 
-    .nav-cta {
-      padding: 0.45rem 1.1rem;
-      background: var(--accent);
-      color: var(--white);
-      border: none;
-      border-radius: 6px;
-      font-size: 0.85rem;
-      font-weight: 500;
-      cursor: pointer;
-      text-decoration: none;
-      transition: background 0.15s;
-    }
- 
-    .nav-cta:hover { background: #1d4ed8; }
- 
-    /* ── HERO ── */
-    .hero {
-      min-height: 100vh;
-      background: var(--dark);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 8rem 2rem 5rem;
-      position: relative;
-      overflow: hidden;
-    }
- 
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: -20%;
-      right: -10%;
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(ellipse, rgba(37,99,235,0.12) 0%, transparent 70%);
-      pointer-events: none;
-    }
- 
-    .hero::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
-    }
- 
-    .hero-inner {
-      max-width: 760px;
-      margin: 0 auto;
-      width: 100%;
-    }
- 
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.35rem 0.85rem;
-      background: rgba(37,99,235,0.15);
-      border: 1px solid rgba(37,99,235,0.3);
-      border-radius: 100px;
-      color: var(--accent-muted);
-      font-size: 0.78rem;
-      font-weight: 500;
-      letter-spacing: 0.02em;
-      margin-bottom: 2rem;
-    }
- 
-    .badge-dot {
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: var(--accent-muted);
-    }
- 
-    .hero h1 {
-      font-size: clamp(2rem, 4.5vw, 3.2rem);
-      font-weight: 700;
-      line-height: 1.18;
-      letter-spacing: -0.03em;
-      color: var(--white);
-      margin-bottom: 1.5rem;
-    }
- 
-    .hero h1 em {
-      font-style: normal;
-      color: var(--accent-muted);
-    }
- 
-    .hero-sub {
-      font-size: clamp(1rem, 2vw, 1.2rem);
-      color: rgba(255,255,255,0.55);
-      line-height: 1.65;
-      max-width: 580px;
-      margin-bottom: 2.5rem;
-      font-weight: 400;
-    }
- 
-    .hero-actions {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
- 
-    .btn-primary {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.8rem 1.8rem;
-      background: var(--accent);
-      color: var(--white);
-      border-radius: 8px;
-      font-size: 0.95rem;
-      font-weight: 600;
-      text-decoration: none;
-      transition: all 0.15s;
-      border: none;
-      cursor: pointer;
-    }
- 
-    .btn-primary:hover {
-      background: #1d4ed8;
-      transform: translateY(-1px);
-    }
- 
-    .btn-ghost {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.8rem 1.8rem;
-      background: transparent;
-      color: rgba(255,255,255,0.7);
-      border: 1px solid rgba(255,255,255,0.18);
-      border-radius: 8px;
-      font-size: 0.95rem;
-      font-weight: 500;
-      text-decoration: none;
-      transition: all 0.15s;
-    }
- 
-    .btn-ghost:hover {
-      background: rgba(255,255,255,0.07);
-      color: var(--white);
-      border-color: rgba(255,255,255,0.3);
-    }
- 
-    .scroll-hint {
-      position: absolute;
-      bottom: 2.5rem;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.4rem;
-      color: rgba(255,255,255,0.25);
-      font-size: 0.72rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
- 
-    .scroll-line {
-      width: 1px;
-      height: 32px;
-      background: linear-gradient(to bottom, rgba(255,255,255,0.25), transparent);
-      animation: scrollPulse 2s ease-in-out infinite;
-    }
- 
-    @keyframes scrollPulse {
-      0%, 100% { opacity: 0.3; }
-      50% { opacity: 1; }
-    }
- 
-    /* ── SECTIONS ── */
-    section {
-      padding: 6rem 2rem;
-    }
- 
-    .container {
-      max-width: 800px;
-      margin: 0 auto;
-    }
- 
-    .section-label {
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 1rem;
-    }
- 
-    h2 {
-      font-size: clamp(1.6rem, 3vw, 2.4rem);
-      font-weight: 700;
-      letter-spacing: -0.025em;
-      line-height: 1.2;
-      color: var(--dark);
-      margin-bottom: 1.2rem;
-    }
- 
-    .lead {
-      font-size: 1.1rem;
-      color: var(--muted);
-      line-height: 1.7;
-      margin-bottom: 2.5rem;
-    }
- 
-    /* ── PROBLEM ── */
-    .problem {
-      background: var(--light);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
- 
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-      margin-bottom: 3rem;
-    }
- 
-    .stat-card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 1.5rem;
-    }
- 
-    .stat-number {
-      font-size: 2.2rem;
-      font-weight: 700;
-      color: var(--dark);
-      letter-spacing: -0.04em;
-      line-height: 1;
-      margin-bottom: 0.4rem;
-    }
- 
-    .stat-number em {
-      font-style: normal;
-      color: var(--accent);
-    }
- 
-    .stat-label {
-      font-size: 0.82rem;
-      color: var(--muted);
-      line-height: 1.45;
-    }
- 
-    .problem-narrative {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 2rem;
-    }
- 
-    .problem-narrative p {
-      color: var(--mid);
-      line-height: 1.75;
-      margin-bottom: 1rem;
-    }
- 
-    .problem-narrative p:last-child { margin-bottom: 0; }
- 
-    .problem-narrative strong {
-      color: var(--dark);
-      font-weight: 600;
-    }
- 
-    /* ── SOLUTION ── */
-    .pillars {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.25rem;
-      margin-top: 2.5rem;
-    }
- 
-    .pillar {
-      background: var(--light);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 1.5rem;
-      transition: border-color 0.2s;
-    }
- 
-    .pillar:hover { border-color: var(--accent-muted); }
- 
-    .pillar-icon {
-      width: 40px; height: 40px;
-      border-radius: 10px;
-      background: var(--accent-light);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 1rem;
-      font-size: 1.1rem;
-    }
- 
-    .pillar h3 {
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: var(--dark);
-      margin-bottom: 0.5rem;
-      letter-spacing: -0.01em;
-    }
- 
-    .pillar p {
-      font-size: 0.85rem;
-      color: var(--muted);
-      line-height: 1.55;
-    }
- 
-    .not-a-wrapper {
-      margin-top: 2.5rem;
-      padding: 1.5rem 2rem;
-      border-left: 3px solid var(--accent);
-      background: var(--accent-light);
-      border-radius: 0 8px 8px 0;
-    }
- 
-    .not-a-wrapper p {
-      font-size: 0.95rem;
-      color: var(--dark-2);
-      line-height: 1.65;
-    }
- 
-    /* ── BEACHHEAD ── */
-    .beachhead {
-      background: var(--dark);
-      color: var(--white);
-    }
- 
-    .beachhead .section-label {
-      color: var(--accent-muted);
-    }
- 
-    .beachhead h2 {
-      color: var(--white);
-    }
- 
-    .beachhead .lead {
-      color: rgba(255,255,255,0.55);
-    }
- 
-    .moore-quote {
-      margin: 2.5rem 0;
-      padding: 2rem;
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 12px;
-      background: rgba(255,255,255,0.03);
-      position: relative;
-    }
- 
-    .moore-quote blockquote {
-      font-size: 1.15rem;
-      font-style: italic;
-      color: rgba(255,255,255,0.8);
-      line-height: 1.65;
-      font-weight: 300;
-    }
- 
-    .moore-quote cite {
-      display: block;
-      margin-top: 1rem;
-      font-size: 0.8rem;
-      color: rgba(255,255,255,0.35);
-      font-style: normal;
-      letter-spacing: 0.02em;
-    }
- 
-    .segment-box {
-      display: flex;
-      align-items: flex-start;
-      gap: 1.5rem;
-      padding: 2rem;
-      border: 1px solid rgba(37,99,235,0.3);
-      background: rgba(37,99,235,0.08);
-      border-radius: 12px;
-    }
- 
-    .segment-icon {
-      font-size: 2rem;
-      flex-shrink: 0;
-      line-height: 1;
-      padding-top: 0.1rem;
-    }
- 
-    .segment-box h3 {
-      font-size: 1rem;
-      font-weight: 600;
-      color: var(--white);
-      margin-bottom: 0.5rem;
-    }
- 
-    .segment-box p {
-      font-size: 0.9rem;
-      color: rgba(255,255,255,0.5);
-      line-height: 1.6;
-    }
- 
-    /* ── FOUNDER ── */
-    .founder-layout {
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 3rem;
-      align-items: start;
-      margin-top: 2.5rem;
-    }
- 
-    .founder-avatar {
-      width: 96px;
-      height: 96px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--accent) 0%, #7c3aed 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2rem;
-      font-weight: 700;
-      color: var(--white);
-      flex-shrink: 0;
-      letter-spacing: -0.03em;
-    }
- 
-    .founder-content h3 {
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: var(--dark);
-      letter-spacing: -0.02em;
-      margin-bottom: 0.25rem;
-    }
- 
-    .founder-title {
-      font-size: 0.85rem;
-      color: var(--muted);
-      margin-bottom: 1.2rem;
-    }
- 
-    .founder-story p {
-      color: var(--mid);
-      line-height: 1.75;
-      margin-bottom: 1rem;
-      font-size: 0.975rem;
-    }
- 
-    .founder-story p:last-child { margin-bottom: 0; }
- 
-    .founder-story strong {
-      color: var(--dark);
-      font-weight: 600;
-    }
- 
-    /* ── DUAL CTA ── */
-    .dual-cta {
-      background: var(--light);
-      border-top: 1px solid var(--border);
-    }
- 
-    .dual-cta h2 { text-align: center; margin-bottom: 0.75rem; }
- 
-    .dual-cta .lead { text-align: center; }
- 
-    .cta-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
-      margin-top: 2.5rem;
-    }
- 
-    .cta-card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 2rem;
-      transition: border-color 0.2s, box-shadow 0.2s;
-    }
- 
-    .cta-card:hover {
-      border-color: var(--accent-muted);
-      box-shadow: 0 4px 24px rgba(37,99,235,0.08);
-    }
- 
-    .cta-card-label {
-      font-size: 0.72rem;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 0.75rem;
-    }
- 
-    .cta-card h3 {
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--dark);
-      letter-spacing: -0.02em;
-      margin-bottom: 0.6rem;
-      line-height: 1.3;
-    }
- 
-    .cta-card p {
-      font-size: 0.875rem;
-      color: var(--muted);
-      line-height: 1.6;
-      margin-bottom: 1.5rem;
-    }
- 
-    .btn-card {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      padding: 0.65rem 1.4rem;
-      border-radius: 7px;
-      font-size: 0.88rem;
-      font-weight: 600;
-      text-decoration: none;
-      transition: all 0.15s;
-    }
- 
-    .btn-card-primary {
-      background: var(--accent);
-      color: var(--white);
-    }
- 
-    .btn-card-primary:hover { background: #1d4ed8; }
- 
-    .btn-card-secondary {
-      background: var(--dark);
-      color: var(--white);
-    }
- 
-    .btn-card-secondary:hover { background: var(--dark-2); }
- 
-    /* ── FOOTER ── */
-    footer {
-      padding: 2rem;
-      border-top: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
- 
-    .footer-left {
-      font-size: 0.82rem;
-      color: var(--muted);
-    }
- 
-    .footer-right {
-      display: flex;
-      gap: 1.5rem;
-    }
- 
-    .footer-link {
-      font-size: 0.82rem;
-      color: var(--muted);
-      text-decoration: none;
-      transition: color 0.15s;
-    }
- 
-    .footer-link:hover { color: var(--dark); }
- 
-    /* ── DIVIDER ── */
-    .divider {
-      width: 48px;
-      height: 2px;
-      background: var(--border);
-      margin: 1.5rem 0 2rem;
-    }
- 
-    /* ── MOBILE ── */
-    @media (max-width: 640px) {
-      nav { padding: 0 1.25rem; }
-      section { padding: 4rem 1.25rem; }
-      .stats-grid { grid-template-columns: 1fr; }
-      .pillars { grid-template-columns: 1fr; }
-      .cta-grid { grid-template-columns: 1fr; }
-      .founder-layout { grid-template-columns: 1fr; gap: 1.5rem; }
-      .hero { padding: 7rem 1.25rem 4rem; }
-      footer { flex-direction: column; }
-      .hero-actions { flex-direction: column; }
-      .btn-primary, .btn-ghost { justify-content: center; }
-      .nav-cta { display: none; }
-    }
-  </style>
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Eximens</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary": "#581e00",
+                    "inverse-surface": "#dae2fd",
+                    "on-primary-fixed": "#00174b",
+                    "surface-container-lowest": "#060e20",
+                    "surface-container-highest": "#2d3449",
+                    "on-tertiary-fixed": "#360f00",
+                    "on-secondary": "#003257",
+                    "on-error-container": "#ffdad6",
+                    "inverse-on-surface": "#283044",
+                    "surface-tint": "#b4c5ff",
+                    "outline-variant": "#434655",
+                    "outline": "#8d90a0",
+                    "on-tertiary-container": "#ffede6",
+                    "tertiary": "#ffb596",
+                    "on-secondary-fixed-variant": "#03497a",
+                    "inverse-primary": "#0053db",
+                    "on-tertiary-fixed-variant": "#7d2d00",
+                    "primary-fixed": "#dbe1ff",
+                    "tertiary-container": "#bc4800",
+                    "on-surface-variant": "#c3c6d7",
+                    "tertiary-fixed": "#ffdbcd",
+                    "primary": "#b4c5ff",
+                    "on-primary": "#002a78",
+                    "surface-variant": "#2d3449",
+                    "primary-fixed-dim": "#b4c5ff",
+                    "surface-bright": "#31394d",
+                    "on-error": "#690005",
+                    "surface-container": "#171f33",
+                    "secondary": "#9ccaff",
+                    "surface": "#0b1326",
+                    "surface-container-low": "#131b2e",
+                    "on-primary-container": "#eeefff",
+                    "on-surface": "#dae2fd",
+                    "background": "#0b1326",
+                    "secondary-container": "#03497a",
+                    "primary-container": "#2563eb",
+                    "on-background": "#dae2fd",
+                    "secondary-fixed": "#d0e4ff",
+                    "on-secondary-fixed": "#001d35",
+                    "surface-container-high": "#222a3d",
+                    "secondary-fixed-dim": "#9ccaff",
+                    "error-container": "#93000a",
+                    "error": "#ffb4ab",
+                    "tertiary-fixed-dim": "#ffb596",
+                    "on-primary-fixed-variant": "#003ea8",
+                    "surface-dim": "#0b1326",
+                    "on-secondary-container": "#87b9f0"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {},
+            "fontFamily": {
+                    "headline": ["Inter"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .glass-panel { background: rgba(11, 19, 38, 0.6); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+        .text-gradient { background: linear-gradient(135deg, #dae2fd 0%, #87b9f0 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .btn-primary-gradient { background: linear-gradient(135deg, #2563eb 0%, #03497a 100%); }
+    </style>
 </head>
-<body>
- 
-  <!-- NAV -->
-  <nav>
-    <a href="#" class="nav-logo">
-      Alexander Argakov <span>/ Eximens</span>
-    </a>
-    <div class="nav-right">
-      <div class="lang-toggle">
-        <button class="lang-btn active" id="btn-en" onclick="setLang('en')">EN</button>
-        <button class="lang-btn" id="btn-ru" onclick="setLang('ru')">RU</button>
-      </div>
-      <a href="mailto:alexanderargakov@gmail.com" class="nav-cta" data-en>Get in touch</a>
-      <a href="mailto:alexanderargakov@gmail.com" class="nav-cta" data-ru>Написать</a>
-    </div>
-  </nav>
- 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-inner">
-      <div class="badge">
-        <div class="badge-dot"></div>
-        <span data-en>Beachhead: Engineering companies · 50–500 employees</span>
-        <span data-ru>Фокус: инженерные компании · 50–500 сотрудников</span>
-      </div>
- 
-      <h1 data-en>
-        Engineering knowledge is your most valuable asset.<br>
-        <em>Until it walks out the door.</em>
-      </h1>
-      <h1 data-ru>
-        Инженерные знания — ваш главный актив.<br>
-        <em>Пока они не уходят вместе с экспертом.</em>
-      </h1>
- 
-      <p class="hero-sub" data-en>
-        Eximens builds agent-powered knowledge architecture for engineering companies
-        with 50–500 employees — so expertise stays with the company, not the person.
-      </p>
-      <p class="hero-sub" data-ru>
-        Eximens строит архитектуру знаний на основе мультиагентных систем
-        для инженерных компаний от 50 до 500 сотрудников — чтобы экспертиза
-        оставалась в компании, а не уходила вместе с людьми.
-      </p>
- 
-      <div class="hero-actions">
-        <a href="#contact" class="btn-primary" data-en>Request a pilot conversation →</a>
-        <a href="#contact" class="btn-primary" data-ru>Запросить пилотную встречу →</a>
-        <a href="#founder" class="btn-ghost" data-en>About the founder</a>
-        <a href="#founder" class="btn-ghost" data-ru>О фаундере</a>
-      </div>
-    </div>
- 
-    <div class="scroll-hint">
-      <div class="scroll-line"></div>
-      <span data-en>scroll</span>
-      <span data-ru>далее</span>
-    </div>
-  </section>
- 
-  <!-- PROBLEM -->
-  <section class="problem" id="problem">
-    <div class="container">
-      <p class="section-label" data-en>The Problem</p>
-      <p class="section-label" data-ru>Проблема</p>
- 
-      <h2 data-en>The knowledge problem hiding in plain sight</h2>
-      <h2 data-ru>Проблема, которую все видят, но никто не решает</h2>
- 
-      <p class="lead" data-en>
-        In engineering companies, the most critical knowledge never makes it into any system.
-        It lives in the heads of your senior specialists — and leaves with them.
-      </p>
-      <p class="lead" data-ru>
-        В инженерных компаниях самые критичные знания не попадают ни в одну систему.
-        Они живут в головах ключевых специалистов — и уходят вместе с ними.
-      </p>
- 
-      <div class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-number"><em>42%</em></div>
-          <div class="stat-label" data-en>of job expertise exists only in employees' heads, not in any system</div>
-          <div class="stat-label" data-ru>экспертизы существует только в головах сотрудников — не в системах</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">~<em>80%</em></div>
-          <div class="stat-label" data-en>in engineering companies specifically — tacit knowledge that cannot be documented with standard tools</div>
-          <div class="stat-label" data-ru>в инженерных компаниях — неявные знания, которые нельзя задокументировать стандартными инструментами</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number"><em>$47M</em></div>
-          <div class="stat-label" data-en>lost per year per large organization to inefficient knowledge sharing (Panopto / YouGov)</div>
-          <div class="stat-label" data-ru>теряет в год крупная организация из-за неэффективного обмена знаниями (Panopto / YouGov)</div>
-        </div>
-      </div>
- 
-      <div class="problem-narrative">
-        <p data-en>
-          <strong>The pattern is always the same.</strong> A senior specialist leaves — retirement, better offer, health reasons.
-          With them goes 10–20 years of tacit knowledge: decisions made, failure modes understood,
-          workarounds discovered. The next engineer has to rediscover all of it from scratch.
-        </p>
-        <p data-ru>
-          <strong>Сценарий всегда один.</strong> Уходит ключевой специалист — на пенсию, к конкуренту, по состоянию здоровья.
-          Вместе с ним уходят 10–20 лет неявной экспертизы: принятые решения, изученные режимы отказов,
-          найденные обходные решения. Следующему инженеру придётся открывать всё это заново.
-        </p>
-        <p data-en>
-          Wikis collect dust. Onboarding documents describe what, not why.
-          Meeting recordings are never watched. The knowledge problem is not a documentation problem —
-          it is an <strong>architecture problem.</strong>
-        </p>
-        <p data-ru>
-          Вики покрываются пылью. Онбординг-документы описывают «что», но не «почему».
-          Записи совещаний никто не смотрит. Проблема знаний — это не проблема документации.
-          Это <strong>архитектурная проблема.</strong>
-        </p>
-      </div>
-    </div>
-  </section>
- 
-  <!-- SOLUTION -->
-  <section id="solution">
-    <div class="container">
-      <p class="section-label" data-en>The Solution</p>
-      <p class="section-label" data-ru>Решение</p>
- 
-      <h2 data-en>Knowledge that stays with the company</h2>
-      <h2 data-ru>Знания, которые остаются в компании</h2>
- 
-      <p class="lead" data-en>
-        Eximens is not another wiki, chatbot, or document storage.
-        It is a multi-agent harness that extracts, structures, and activates engineering expertise —
-        continuously, with human oversight built in.
-      </p>
-      <p class="lead" data-ru>
-        Eximens — это не очередная вики, чат-бот или хранилище документов.
-        Это мультиагентная система, которая извлекает, структурирует и активирует инженерную экспертизу —
-        непрерывно, с обязательным участием человека.
-      </p>
- 
-      <div class="pillars">
-        <div class="pillar">
-          <div class="pillar-icon">⬇</div>
-          <h3 data-en>Extract</h3>
-          <h3 data-ru>Извлечение</h3>
-          <p data-en>Structured capture of expertise from meetings, documents, expert interviews, and work artifacts — before it disappears.</p>
-          <p data-ru>Структурированное извлечение экспертизы из совещаний, документов, интервью с экспертами и рабочих артефактов — до того как она исчезнет.</p>
-        </div>
-        <div class="pillar">
-          <div class="pillar-icon">🗂</div>
-          <h3 data-en>Structure</h3>
-          <h3 data-ru>Структурирование</h3>
-          <p data-en>Knowledge is transformed into a company-owned, queryable corpus — not locked in any vendor's database.</p>
-          <p data-ru>Знания преобразуются в корпоративный репозиторий, доступный для поиска — без привязки к базе данных вендора.</p>
-        </div>
-        <div class="pillar">
-          <div class="pillar-icon">⚡</div>
-          <h3 data-en>Activate</h3>
-          <h3 data-ru>Активация</h3>
-          <p data-en>Engineers get precise answers with full traceability — not a list of documents to read. Experts review, correct, and strengthen the system over time.</p>
-          <p data-ru>Инженеры получают точные ответы с полной трассировкой — не список документов для чтения. Эксперты проверяют, корректируют и усиливают систему с течением времени.</p>
-        </div>
-      </div>
- 
-      <div class="not-a-wrapper">
-        <p data-en>
-          <strong>Not a GPT wrapper.</strong> The differentiator is the harness architecture —
-          multi-agent routing, privacy-preserving design, and a human-in-the-loop flywheel that improves
-          with every expert interaction. Same underlying model, better architecture:
-          independent research shows this difference alone accounts for +13.7 percentage points in task accuracy.
-        </p>
-        <p data-ru>
-          <strong>Не обёртка над GPT.</strong> Ключевое отличие — архитектура обвязки:
-          мультиагентная маршрутизация, защита данных на уровне дизайна и петля обратной связи с участием человека,
-          которая улучшается с каждым экспертным взаимодействием. Та же базовая модель, лучшая архитектура —
-          независимые исследования показывают, что это различие даёт +13,7 процентных пункта точности задач.
-        </p>
-      </div>
-    </div>
-  </section>
- 
-  <!-- BEACHHEAD -->
-  <section class="beachhead" id="beachhead">
-    <div class="container">
-      <p class="section-label" data-en>Strategic Focus</p>
-      <p class="section-label" data-ru>Стратегический фокус</p>
- 
-      <h2 data-en>One segment. Total focus.</h2>
-      <h2 data-ru>Один сегмент. Полный фокус.</h2>
- 
-      <p class="lead" data-en>
-        Geoffrey Moore's core insight in Crossing the Chasm applies directly here:
-        the path to scale starts with complete dominance of a single beachhead segment —
-        not broad positioning for everyone.
-      </p>
-      <p class="lead" data-ru>
-        Ключевой инсайт Джеффри Мура из «Преодоления пропасти» применим напрямую:
-        путь к масштабированию начинается с полного доминирования в одном сегменте —
-        а не с широкого позиционирования для всех.
-      </p>
- 
-      <div class="moore-quote">
-        <blockquote data-en>
-          "Target a single beachhead segment and dominate it completely before expanding.
-          Not 'agent harness for everyone' — but 'agent-powered knowledge architecture
-          for engineering companies with 50–500 employees.'"
-        </blockquote>
-        <blockquote data-ru>
-          «Выбери один сегмент и полностью завоюй его, прежде чем расширяться.
-          Не "агентная система для всех" — а "архитектура знаний для инженерных компаний
-          от 50 до 500 сотрудников".»
-        </blockquote>
-        <cite data-en>— Applied from Geoffrey Moore, Crossing the Chasm</cite>
-        <cite data-ru>— Применение концепции Джеффри Мура, «Преодоление пропасти»</cite>
-      </div>
- 
-      <div class="segment-box">
-        <div class="segment-icon">⚙️</div>
-        <div>
-          <h3 data-en>Why engineering companies, 50–500 employees?</h3>
-          <h3 data-ru>Почему инженерные компании от 50 до 500 сотрудников?</h3>
-          <p data-en>
-            Large enough to have irreplaceable specialists — small enough to lack a structured knowledge system.
-            High concentration of tacit expertise. Clear, measurable ROI when a specialist leaves and the
-            company doesn't lose years of accumulated know-how. This is the segment where the problem is
-            sharpest, the buyer is identifiable, and the value is immediately demonstrable.
-          </p>
-          <p data-ru>
-            Достаточно большие, чтобы иметь незаменимых специалистов — достаточно маленькие, чтобы не иметь
-            структурированной системы знаний. Высокая концентрация неявной экспертизы. Чёткий, измеримый ROI
-            когда уходит специалист, а компания не теряет годы накопленного know-how. Это сегмент, где проблема
-            острее всего, покупатель идентифицируем, а ценность поддаётся немедленной демонстрации.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
- 
-  <!-- FOUNDER -->
-  <section id="founder">
-    <div class="container">
-      <p class="section-label" data-en>The Founder</p>
-      <p class="section-label" data-ru>Фаундер</p>
- 
-      <h2 data-en>Built by someone who lived the problem</h2>
-      <h2 data-ru>Создано тем, кто сам столкнулся с этой проблемой</h2>
- 
-      <div class="divider"></div>
- 
-      <div class="founder-layout">
-        <div class="founder-avatar">AA</div>
-        <div class="founder-content">
-          <h3>Alexander Argakov</h3>
-          <p class="founder-title" data-en>Mechanical engineer → Founder · Based in UAE</p>
-          <p class="founder-title" data-ru>Инженер-механик → Фаундер · ОАЭ</p>
- 
-          <div class="founder-story">
-            <p data-en>
-              I spent over a decade as a mechanical engineer in enterprise industrial companies.
-              Every time a senior specialist left, the same thing happened:
-              <strong>years of accumulated expertise simply disappeared.</strong>
-              Projects stalled. Junior engineers had to rediscover what their predecessors already knew.
-              Entire decision-making rationales vanished without a trace.
+<body class="bg-surface text-on-surface antialiased min-h-screen flex flex-col items-center">
+
+<!-- Section 1: Fixed Nav Bar -->
+<nav class="fixed top-0 w-full z-50 flex justify-center px-6 py-4 mx-auto max-w-[800px] bg-slate-950/80 backdrop-blur-lg">
+<div class="flex justify-between items-center w-full">
+<a class="text-xl font-bold text-white tracking-tighter hover:text-blue-500 transition-colors duration-200" href="#">Eximens</a>
+<div class="hidden md:flex gap-6 items-center">
+<a class="text-slate-400 font-medium hover:text-blue-500 transition-colors duration-200" href="#problem">Problem</a>
+<a class="text-slate-400 font-medium hover:text-blue-500 transition-colors duration-200" href="#solution">Solution</a>
+<a class="text-slate-400 font-medium hover:text-blue-500 transition-colors duration-200" href="#founder">Founder</a>
+</div>
+<a class="text-blue-600 dark:text-blue-500 font-inter tracking-tight leading-relaxed font-bold hover:text-blue-400 transition-colors duration-200 text-sm" href="mailto:contact@eximens.com">Get in touch</a>
+</div>
+</nav>
+
+<!-- Main Content Wrapper -->
+<main class="w-full max-w-[800px] mx-auto flex flex-col gap-y-32 pb-32 pt-32 px-6 relative">
+
+<!-- Background Glow for Hero -->
+<div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-primary-container/10 blur-[120px] rounded-full pointer-events-none -z-10"></div>
+
+<!-- Section 2: Hero -->
+<section class="flex flex-col items-center justify-center min-h-[716px] text-center gap-8 relative" id="hero">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container-highest text-on-surface text-xs font-bold tracking-wider uppercase mb-4">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+                Now accepting pilot partners
+            </div>
+<h1 class="text-[3.5rem] font-bold tracking-tighter leading-[1.1] text-gradient max-w-[700px]"><div>Your organization already knows the answer.</div><div>It just can't hear itself think.</div></h1>
+<p class="text-[1rem] font-normal leading-[1.7] text-on-surface-variant max-w-[600px]">
+                Eximens connects the tacit expertise scattered across your engineering team into a living knowledge system. What one specialist learned on one project becomes available to every engineer on every project.
             </p>
-            <p data-ru>
-              Больше десяти лет я проработал инженером-механиком в крупных промышленных компаниях.
-              Каждый раз, когда уходил ключевой специалист, происходило одно и то же:
-              <strong>годы накопленной экспертизы просто исчезали.</strong>
-              Проекты тормозили. Молодые инженеры заново открывали то, что их предшественники уже знали.
-              Логика принятых решений испарялась бесследно.
-            </p>
-            <p data-en>
-              I tried every available tool — wikis, documentation systems, structured onboarding.
-              None of them solved the real problem: <strong>capturing and activating tacit knowledge</strong>
-              at the moment it matters, in the format engineers actually use.
-            </p>
-            <p data-ru>
-              Я пробовал все доступные инструменты — вики, системы документирования, структурированный онбординг.
-              Ни один из них не решал настоящую проблему: <strong>захват и активацию неявных знаний</strong>
-              в нужный момент, в формате, которым реально пользуются инженеры.
-            </p>
-            <p data-en>
-              Eximens is the system I wish we had.
-              I'm building it from the inside of the problem — not from the outside looking in.
-            </p>
-            <p data-ru>
-              Eximens — это система, которую я хотел бы иметь тогда.
-              Я строю её изнутри проблемы — не снаружи, глядя внутрь.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
- 
-  <!-- DUAL CTA -->
-  <section class="dual-cta" id="contact">
-    <div class="container">
-      <h2 data-en>Ready to explore?</h2>
-      <h2 data-ru>Готовы обсудить?</h2>
- 
-      <p class="lead" data-en>Two conversations. One problem worth solving.</p>
-      <p class="lead" data-ru>Два разговора. Одна проблема, которую стоит решить.</p>
- 
-      <div class="cta-grid">
-        <div class="cta-card">
-          <div class="cta-card-label" data-en>For engineering companies</div>
-          <div class="cta-card-label" data-ru>Для инженерных компаний</div>
-          <h3 data-en>Request a pilot conversation</h3>
-          <h3 data-ru>Запросить пилотную встречу</h3>
-          <p data-en>
-            Engineering company with 50–500 employees?
-            Let's talk about whether Eximens fits your knowledge challenge —
-            no commitment, no pitch deck, just a conversation.
-          </p>
-          <p data-ru>
-            Инженерная компания от 50 до 500 сотрудников?
-            Давайте обсудим, подходит ли Eximens для вашей ситуации —
-            никаких обязательств, никакой презентации, только разговор.
-          </p>
-          <a href="mailto:alexanderargakov@gmail.com?subject=Pilot%20conversation%20—%20Eximens" class="btn-card btn-card-primary" data-en>
-            Start the conversation →
-          </a>
-          <a href="mailto:alexanderargakov@gmail.com?subject=Пилот%20—%20Eximens" class="btn-card btn-card-primary" data-ru>
-            Начать разговор →
-          </a>
-        </div>
- 
-        <div class="cta-card">
-          <div class="cta-card-label" data-en>For investors & accelerators</div>
-          <div class="cta-card-label" data-ru>Для инвесторов и акселераторов</div>
-          <h3 data-en>Schedule a founder call</h3>
-          <h3 data-ru>Записаться на встречу с фаундером</h3>
-          <p data-en>
-            Interested in the architecture, the beachhead strategy, or the team?
-            I'm open to conversations with investors and accelerator programs
-            aligned with the B2B AI / knowledge infrastructure space.
-          </p>
-          <p data-ru>
-            Интересна архитектура, стратегия beachhead или команда?
-            Открыт к разговорам с инвесторами и акселераторами,
-            работающими в B2B AI и инфраструктуре знаний.
-          </p>
-          <a href="mailto:alexanderargakov@gmail.com?subject=Investor%20conversation%20—%20Eximens" class="btn-card btn-card-secondary" data-en>
-            Get in touch →
-          </a>
-          <a href="mailto:alexanderargakov@gmail.com?subject=Инвестор%20—%20Eximens" class="btn-card btn-card-secondary" data-ru>
-            Написать →
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
- 
-  <!-- FOOTER -->
-  <footer>
-    <div class="footer-left">
-      <span data-en>© 2025 Alexander Argakov · Eximens</span>
-      <span data-ru>© 2025 Александр Аргаков · Eximens</span>
-    </div>
-    <div class="footer-right">
-      <a href="mailto:alexanderargakov@gmail.com" class="footer-link">alexanderargakov@gmail.com</a>
-    </div>
-  </footer>
- 
-  <script>
-    function setLang(lang) {
-      document.body.classList.toggle('ru', lang === 'ru');
-      document.getElementById('btn-en').classList.toggle('active', lang === 'en');
-      document.getElementById('btn-ru').classList.toggle('active', lang === 'ru');
-    }
- 
-    // Smooth anchor scroll offset for fixed nav
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-      a.addEventListener('click', e => {
-        const id = a.getAttribute('href').slice(1);
-        const target = document.getElementById(id);
-        if (target) {
-          e.preventDefault();
-          window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' });
-        }
-      });
-    });
-  </script>
-</body>
-</html>
+<div class="flex flex-col sm:flex-row gap-4 mt-8 w-full sm:w-auto">
+<a href="#solution" class="btn-primary-gradient text-on-primary-container px-8 py-3 rounded-lg font-bold hover:brightness-110 transition-all shadow-[0_4px_32px_rgba(37,99,235,0.2)] text-center">
+                    See how it works
+                </a>
+<a href="https://calendly.com/alexanderargakov/eximens" target="_blank" class="bg-surface-container-high text-on-surface px-8 py-3 rounded-lg font-bold hover:bg-surface-container-highest transition-all ring-1 ring-outline-variant/15 text-center">
+                    Book a 15 min call
+                </a>
+</div>
+<!-- Privacy trust signal — visible pill -->
+<div class="flex items-center gap-2 px-4 py-2 rounded-full bg-surface-container ring-1 ring-outline-variant/20 mt-2">
+<span class="material-symbols-outlined text-primary" style="font-size: 16px;">lock</span>
+<span class="text-sm text-on-surface-variant tracking-wide font-medium">Cloud or local. Zero data exposure.</span>
+</div>
+<div class="absolute bottom-[-100px] left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-50 animate-pulse">
+<span class="text-xs uppercase font-bold tracking-widest text-on-surface-variant">Scroll</span>
+<span class="material-symbols-outlined text-on-surface-variant" style="font-size: 16px;">arrow_downward</span>
+</div>
+</section>
+
+<!-- Section 3: The Problem -->
+<section class="flex flex-col gap-12 pt-16" id="problem">
+<div class="flex flex-col gap-2">
+<span class="text-[0.75rem] font-bold uppercase tracking-widest text-primary">The Problem</span>
+<h2 class="text-[1.75rem] font-bold tracking-tight text-on-surface">Three ways engineering organizations lose their minds.</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Failure mode 1: Knowledge drain -->
+<div class="bg-surface-container-low p-6 rounded-lg flex flex-col gap-4">
+<div class="flex flex-col gap-0.5">
+<span class="text-[2rem] font-bold text-on-surface">42%</span>
+<span class="text-[0.65rem] text-outline tracking-wide">Panopto, 2018</span>
+</div>
+<h4 class="text-[0.85rem] font-bold uppercase tracking-wider text-primary">Knowledge drain</h4>
+<p class="text-[1rem] font-normal leading-[1.7] text-on-surface-variant">When a specialist leaves, their decision context, lessons learned, and failure patterns leave with them. Rebuilding takes years. Sometimes the knowledge is gone permanently.</p>
+</div>
+<!-- Failure mode 2: Solved twice -->
+<div class="bg-surface-container-low p-6 rounded-lg flex flex-col gap-4">
+<div class="flex flex-col gap-0.5">
+<span class="text-[2rem] font-bold text-on-surface">80%</span>
+<span class="text-[0.65rem] text-outline tracking-wide">Panopto / KM Research</span>
+</div>
+<h4 class="text-[0.85rem] font-bold uppercase tracking-wider text-primary">Solved twice</h4>
+<p class="text-[1rem] font-normal leading-[1.7] text-on-surface-variant">A critical problem your team solved last quarter is being solved from scratch by another team right now. They will never know about each other. The same three weeks. Spent twice.</p>
+</div>
+<!-- Failure mode 3: Connections never happen -->
+<div class="bg-surface-container-low p-6 rounded-lg flex flex-col gap-4">
+<div class="flex flex-col gap-0.5">
+<span class="text-[2rem] font-bold text-on-surface">1.8 hrs</span>
+<span class="text-[0.65rem] text-outline tracking-wide">McKinsey Global Institute</span>
+</div>
+<h4 class="text-[0.85rem] font-bold uppercase tracking-wider text-primary">Connections never happen</h4>
+<p class="text-[1rem] font-normal leading-[1.7] text-on-surface-variant">Engineers spend 1.8 hours every day searching for information. Not because it does not exist. Because no one built the layer that connects the answer to the question.</p>
+</div>
+</div>
+<!-- Bridge to solution -->
+<div class="bg-surface-container-lowest p-8 rounded-lg ring-1 ring-outline-variant/15">
+<p class="text-[1rem] font-normal leading-[1.7] text-on-surface">Mainstream AI is solving the wrong problem. Your tools can summarize yesterday's meeting, draft your emails, and generate your slides. Useful for the individual. Invisible to the organization. When the conversation ends, the knowledge disappears. <span class="text-on-surface font-medium">No one captures what was decided, why it was decided, or who in the building already knew the answer.</span></p>
+</div>
+</section>
+
+<!-- Section 4: The Solution -->
+<section class="flex flex-col gap-12 pt-16" id="solution">
+<div class="flex flex-col gap-2">
+<span class="text-[0.75rem] font-bold uppercase tracking-widest text-primary">The Solution</span>
+<h2 class="text-[1.75rem] font-bold tracking-tight text-on-surface">Cognitive infrastructure for engineering.</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-surface-container p-6 rounded-lg flex flex-col gap-4 group hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-primary text-3xl">memory</span>
+<h3 class="text-[1rem] font-bold text-on-surface">Capture</h3>
+<p class="text-[1rem] font-normal leading-[1.7] text-on-surface-variant">A thin intelligence layer wraps around everything you already use: meetings, documents, messages, decisions. It continuously converts human context into structured, AI-ready knowledge. No new tools to learn. No new habits to form. Nothing changes except that nothing gets lost.</p>
+</div>
+<div class="bg-surface-container p-6 rounded-lg flex flex-col gap-4 group hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-primary text-3xl">account_tree</span>
+<h3 class="text-[1rem] font-bold text-on-surface">Structure</h3>
+<p class="text-[1rem] font-normal leading-[1.7] text-on-surface-variant">Raw context is continuously shaped into a cognitive topology of your organization's expertise: how decisions were made, why approaches were chosen, which problems were already solved and by whom. It deepens with every interaction.</p>
+</div>
+<div class="bg-surface-container p-6 rounded-lg flex flex-col gap-4 group hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-primary text-3xl">bolt</span>
+<h3 class="text-[1rem] font-bold text-on-surface">Activate</h3>
+<p class="text-[1rem] font-normal leading-[1.7] text-on-surface-variant">Engineers work with organizational knowledge interactively: not just finding answers, but understanding the full reasoning behind them. Management sees which expertise is at risk, where knowledge concentrates, and what problems are being reinvented across teams. The organization gains the ability to think about itself.</p>
+</div>
+</div>
+<!-- Narrative Encryption privacy block -->
+<div class="border-l-2 border-primary pl-6 py-2">
+<p class="text-[1rem] font-normal leading-[1.7] text-on-surface">We call it <span class="font-semibold text-on-surface">Narrative Encryption</span>. Your engineering knowledge reaches frontier AI, and nothing identifiable ever leaves your perimeter. <span class="font-medium">Cloud or local. Zero data exposure.</span></p>
+</div>
+</section>
+
+<!-- Section 6: The Founder -->
+<section class="flex flex-col gap-12 pt-16" id="founder">
+<div class="flex flex-col gap-2">
+<span class="text-[0.75rem] font-bold uppercase tracking-widest text-primary">The Founder</span>
+</div>
+<div class="w-full h-[1px] bg-outline-variant/20"></div>
+<div class="flex flex-col md:flex-row gap-10 items-start">
+<!-- PHOTO: replace FOUNDER_PHOTO_URL with GitHub raw link -->
+<!-- e.g. https://raw.githubusercontent.com/alexanderargakov/eximens-assets/main/founder.jpg -->
+<img
+  id="founder-img"
+  src="FOUNDER_PHOTO_URL"
+  alt="Aleksandr Argakov"
+  class="w-48 h-60 rounded-lg object-cover shrink-0 ring-1 ring-outline-variant/15"
+  onerror="this.outerHTML='<div class=\'w-48 h-60 rounded-lg bg-surface-container-highest flex items-center justify-center shrink-0 ring-1 ring-outline-variant/15\'><span class=\'text-2xl font-bold text-on-surface\'>AA</span></div>'"
+>
+<div class="flex flex-col gap-4">
+<div class="flex items-center gap-3 flex-wrap">
+<h3 class="text-[1.75rem] font-bold tracking-tight text-on-surface">Aleksandr Argakov</h3>
+<a href="https://www.linkedin.com/in/alexanderargakov/" target="_blank" rel="noopener noreferrer"
+   class="flex items-center gap-1.5 text-xs text-on-surface-variant hover:text-primary transition-colors ring-1 ring-outline-variant/30 px-2.5 py-1 rounded-full">
+  <svg class="w-3.5 h-3.5 shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+  </svg>
+  LinkedIn
+</a>
+</div>
+<div class="space-y-4">
+<p class="text-[1rem] font-normal leading-[1.7] text-on-surface-variant">After a decade engineering critical systems, I witnessed the same failure mode repeatedly. Projects didn't fail due to lack of technical skill. They failed because critical context was isolated in the minds of a few key individuals. Eximens was built to solve this exact bottleneck.</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Section 7: Waitlist -->
+<section class="bg-surface-container-lowest p-12 rounded-xl flex flex-col items-center text-center gap-8 ring-1 ring-outline-variant/15 relative overflow-hidden">
+<div class="absolute top-0 left-1/2 -translate-x-1/2 w-[300px] h-[300px] bg-secondary-container/20 blur-[80px] rounded-full pointer-events-none"></div>
+<h2 class="text-[1.75rem] font-bold tracking-tight text-on-surface z-10">Follow the build</h2>
+<form class="flex flex-col sm:flex-row gap-4 w-full max-w-[500px] z-10">
+<div class="flex-grow flex flex-col gap-1 text-left">
+<label class="text-[0.75rem] font-bold uppercase tracking-widest text-on-surface-variant" for="email">Email Address</label>
+<input class="w-full bg-surface-container p-3 rounded-lg text-on-surface border-none focus:ring-2 focus:ring-primary focus:outline-none transition-all placeholder:text-outline" id="email" placeholder="engineer@company.com" type="email">
+</div>
+<button class="btn-primary-gradient text-on-primary-container px-6 py-3 rounded-lg font-bold hover:brightness-110 transition-all self-end mt-4 sm:mt-0 h-[48px]" type="submit">
+                    Join waitlist
+                </button>
+</form>
+</section>
+
+<!-- Section 8: Dual CTA -->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="bg-surface-container-low p-8 rounded-lg flex flex-col gap-6 ring-1 ring-outline-variant/15">
+<h3 class="text-[1rem] font-bold text-on-surface">For Engineering Teams</h3>
+<p class="text-[1rem] font-normal leading-[1.7] text-on-surface-variant flex-grow">Deploy our pilot to secure your institutional knowledge before your next senior departure.</p>
+<a class="inline-block bg-surface-container-high text-on-surface px-6 py-3 rounded-lg font-bold hover:bg-surface-container-highest transition-all text-center ring-1 ring-outline-variant/15"
+   href="https://calendly.com/alexanderargakov/eximens" target="_blank" rel="noopener noreferrer">
+                    Book a call
+                </a>
+</div>
+<div class="bg-surface-container-low p-8 rounded-lg flex flex-col gap-6 ring-1 ring-outline-variant/15">
+<h3 class="text-[1rem] font-bold text-on-surface">For Investors</h3>
+<p class="text-[1rem] font-normal leading-[1.7] text-on-surface-variant flex-grow">We are currently raising our seed round to accelerate our structural analysis engine.</p>
+<a class="inline-block btn-primary-gradient text-on-primary-container px-6 py-3 rounded-lg font-bold hover:brightness-110 transition-all text-center"
+   href="https://calendly.com/alexanderargakov/eximens" target="_blank" rel="noopener noreferrer">
+                    Get in touch
+                </a>
+</div>
+</section>
+
+</main>
+
+<!-- Section 9: Footer -->
+<footer class="w-full max-w-[800px] mx-auto px-6 py-16 flex flex-row justify-between items-center border-t border-slate-900 bg-slate-950">
+<span class="font-inter text-sm font-normal leading-relaxed text-slate-500">© 2026 Eximens. All rights reserved.</span>
+<div class="flex gap-6">
+<a class="font-inter text-sm font-normal leading-relaxed text-white underline hover:text-blue-400 transition-all opacity-80"
+   href="https://www.linkedin.com/in/alexanderargakov/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+<a class="font-inter text-sm font-normal leading-relaxed text-slate-500 hover:text-blue-400 transition-all"
+   href="mailto:contact@eximens.com">Email</a>
+</div>
+</footer>
+
+</body></html>
